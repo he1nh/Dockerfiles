@@ -1,4 +1,4 @@
-# howto us
+# usage
 run:
 ```
 make run
