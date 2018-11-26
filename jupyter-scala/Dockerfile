@@ -12,6 +12,9 @@ RUN useradd -c 'jupyter notebook user' -d /home/jupyter -m jupyter
 USER jupyter
 WORKDIR /home/jupyter
 
+# get some data
+RUN curl -O curl -O https://litemind.com/wp-content/uploads/misc/litemind-quotes.csv
+
 EXPOSE	4041
 EXPOSE	8080
 
