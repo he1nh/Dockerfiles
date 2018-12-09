@@ -1,35 +1,35 @@
 version: "3"
 services:
-  masternode:
-    image: "hadoop:latest"
+  master:
+    build: hadoop-node
+    image: hadoop-node
+    hostname: master
     ports:
       - "8020:8020"
-      - "50070:50070"
-      - "9000:9000"
       - "8088:8088"
+      - "9000:9000"
+      - "50070:50070"
+    volumes:
+      - ./hadoop-node/dirs/etc:/opt/hadoop-2.8.4/etc/hadoop
     environment:
-      - NAMENODE=TRUE
-      - RESOURCE_MANAGER=TRUE
+      - NAMENODE="TRUE"
+      - RESOURCE_MANAGER="TRUE"
+  node:
+    build: hadoop-node
+    image: hadoop-node
     volumes:
-      - ./hadoop/etc:/opt/hadoop-2.8.4/etc/hadoop
-  datanode1:
-    image: "hadoop:latest"
-    volumes:
-      - ./hadoop/etc:/opt/hadoop-2.8.4/etc/hadoop
+      - ./hadoop-node/dirs/etc:/opt/hadoop-2.8.4/etc/hadoop
     depends_on:
-      - masternode
-  datanode2:
-    image: "hadoop:latest"
+      - master
+  gateway:
+    build: hadoop-node
+    image: hadoop-node
+    hostname: gateway
     volumes:
-      - ./hadoop/etc:/opt/hadoop-2.8.4/etc/hadoop
-    depends_on:
-      - masternode
-  datanode3:
-    image: "hadoop:latest"
-    volumes:
-      - ./hadoop/etc:/opt/hadoop-2.8.4/etc/hadoop
-    depends_on:
-      - masternode
+      - ./hadoop-node/dirs/etc:/opt/hadoop-2.8.4/etc/hadoop
+    command: /usr/sbin/sshd -D
+    ports:
+      - "22:22"
 #  nifi:
 #    image: "apache/nifi:latest"
 #    ports:

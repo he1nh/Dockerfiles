@@ -1,5 +1,22 @@
 # hadoop
 
-Don't use
+> Note: work in progress
 
-My files for following along the edX course [Introduction to Apache Hadoop](https://www.edx.org/course/introduction-apache-hadoop-linuxfoundationx-lfs103x) from the Linux Foundation.
+## how to use
+bring up a single node hadoop cluster:
+```
+docker-compose up
+```
+
+scale to three nodes:
+```
+docker-compose scale node=3
+```
+
+## web insterfaces
+
+- Hadoop: http://localhost:8088
+- HDFS:   http://localhost:50070
+
+## local volume
+The setup uses a local dir (```./hadoop-node/etc```) to distribute cluster configuration to all nodes in the cluster, including the master node.

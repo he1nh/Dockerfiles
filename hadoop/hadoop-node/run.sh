@@ -1,17 +1,19 @@
 #!/bin/bash
 
-if [ "$NAMENODE" == "TRUE" ]
+# start ssh server
+/usr/sbin/sshd
+
+if [ ! -z "$NAMENODE" ]
 then
 	hdfs namenode -format -nonInteractive
-        hdfs namenode &
+    hdfs namenode &
 else
 	hdfs datanode &
 fi
 
-if [ "$RESOURCE_MANAGER" == "TRUE" ]
+if [ ! -z "$RESOURCE_MANAGER" ]
 then
 	exec yarn resourcemanager
 else
 	exec yarn nodemanager
 fi
-
