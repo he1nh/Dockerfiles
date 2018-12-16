@@ -21,4 +21,11 @@
     <name>fs.defaultFS</name>
     <value>hdfs://master:9000</value>
   </property>
+  <property>
+    <description>
+        Path on the local filesystem where the NameNode stores the namespace and transactions logs persistently. 
+    </description>
+    <name>dfs.namenode.name.dir</name>
+    <value>/opt/logs</value>
+  </property>
 </configuration>
