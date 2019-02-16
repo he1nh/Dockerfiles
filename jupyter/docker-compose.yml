@@ -1,0 +1,11 @@
+version: "3"
+services:
+  lab:
+    build: .
+    image: jupyter-spark
+    hostname: spark
+    ports:
+      - "4040:4040"
+      - "8888:8888"
+    volumes:
+      - ~/shared:/home/jupyter/shared
