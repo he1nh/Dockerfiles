@@ -1,0 +1,8 @@
+version: "3"
+services:
+  node:
+    build: node
+    image: node
+    hostname: node
+    ports:
+      - "8022:22"
